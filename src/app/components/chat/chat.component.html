@@ -1,0 +1,31 @@
+<div class="chat-container">
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message">
+        <strong>{{ msg.user }}:</strong>
+        <span *ngIf="!msg.isEditing">{{ msg.content }}</span>
+        <input *ngIf="msg.isEditing" [(ngModel)]="msg.content"/>
+        
+        <button (click)="reactToMessage(msg.id, 'like')">👍</button>
+        <button (click)="reactToMessage(msg.id, 'dislike')">👎</button>
+        <button (click)="deleteMessage(msg.id)">🗑 Видалити</button>
+        <button *ngIf="!msg.isEditing" (click)="editMessage(msg)">✏ Редагувати</button>
+        <button *ngIf="msg.isEditing" (click)="saveEdit(msg)">💾 Зберегти</button>
+      </div>      
+    </div>
+    <div class="input-area">
+      <input [(ngModel)]="newMessage" placeholder="Введіть повідомлення..." />
+      <button (click)="sendMessage()">Відправити</button>
+    </div>
+    <div *ngFor="let msg of messages" class="message">
+      <strong>{{ msg.user }}:</strong> {{ msg.content }}
+      <button (click)="deleteMessage(msg.id)">🗑 Видалити</button>
+    </div>
+    <div *ngFor="let msg of messages" class="message">
+      <strong>{{ msg.user }}:</strong>
+      <span *ngIf="!msg.isEditing">{{ msg.content }}</span>
+      <input *ngIf="msg.isEditing" [(ngModel)]="msg.content"/>
+      <button *ngIf="!msg.isEditing" (click)="editMessage(msg)">✏ Редагувати</button>
+      <button *ngIf="msg.isEditing" (click)="saveEdit(msg)">💾 Зберегти</button>
+    </div>
+    
+  </div>
